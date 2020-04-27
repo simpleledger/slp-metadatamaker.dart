@@ -2,19 +2,20 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:convert/convert.dart';
 
+/// Prepend proper varint to a buffer chunk to be included in script.
 List<int> pushdata(List<int> buf) {
-  if (buf.length == 0) {
+  if (buf.isEmpty) {
     return [0x4C, 0x00];
   } else if (buf.length < 0x4E) {
     return [buf.length, ...buf];
   } else if (buf.length < 0xFF) {
     return [0x4c, buf.length, ...buf];
   } else if (buf.length < 0xFFFF) {
-    final tmp = new ByteData(2);
+    final tmp = ByteData(2);
     tmp.setUint16(0, buf.length, Endian.little);
     return [0x4d, ...tmp.buffer.asUint8List().toList(), ...buf];
   } else if (buf.length < 0xFFFFFFFF) {
-    final tmp = new ByteData(4);
+    final tmp = ByteData(4);
     tmp.setUint32(0, buf.length, Endian.little);
     return [0x4e, ...tmp.buffer.asUint8List().toList(), ...buf];
   } else {
@@ -22,6 +23,7 @@ List<int> pushdata(List<int> buf) {
   }
 }
 
+/// Convert a big int to 64-bit big endian buffer.
 List<int> BNToInt64BE(BigInt bn) {
   if (bn.isNegative) {
     throw('bn not positive integer');
@@ -45,6 +47,7 @@ List<int> BNToInt64BE(BigInt bn) {
   return hex.decode(hexStr.padLeft(16, '0'));
 }
 
+/// Creates a GENESIS OP_RETURN buffer.
 List<int> createOpReturnGenesis(
   int versionType,
   String ticker,
@@ -53,14 +56,14 @@ List<int> createOpReturnGenesis(
   List<int> documentHash,
   int decimals,
   BigInt quantity,
-  [ int mintBatonVout = null]
+  [ int mintBatonVout ]
   ) {
 
   if (! [0x01, 0x41, 0x81].contains(versionType)) {
     throw('unknown versionType');
   }
   
-  if (documentHash.length != 0 && documentHash.length != 32) {
+  if (! documentHash.isEmpty && documentHash.length != 32) {
     throw('documentHash must be either 0 or 32 hex bytes');
   }
 
@@ -105,6 +108,7 @@ List<int> createOpReturnGenesis(
   return buf;
 }
 
+/// Creates a MINT OP_RETURN buffer.
 List<int> createOpReturnMint(
   int versionType,
   List<int> tokenId,
@@ -138,6 +142,7 @@ List<int> createOpReturnMint(
   return buf;
 }
 
+/// Creates a SEND OP_RETURN buffer.
 List<int> createOpReturnSend(
   int versionType,
   List<int> tokenId,

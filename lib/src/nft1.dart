@@ -1,5 +1,6 @@
 import './util.dart';
 
+/// Creates a GENESIS OP_RETURN buffer for an NFT1 Group.
 List<int> Nft1GroupGenesis(
     String ticker,
     String name,
@@ -7,7 +8,7 @@ List<int> Nft1GroupGenesis(
     List<int> documentHash,
     int decimals,
     BigInt quantity,
-    [int mintBatonVout=null]
+    [ int mintBatonVout ]
   ) {
   return createOpReturnGenesis(
     0x81,
@@ -21,10 +22,11 @@ List<int> Nft1GroupGenesis(
   );
 }
 
+/// Creates a MINT OP_RETURN buffer for an NFT1 Group.
 List<int> Nft1GroupMint(
     List<int> tokenId,
     BigInt quantity,
-    [int mintBatonVout = null]
+    [ int mintBatonVout ]
   ) {
   return createOpReturnMint(
     0x81,
@@ -34,6 +36,7 @@ List<int> Nft1GroupMint(
   );
 }
 
+/// Creates a SEND OP_RETURN buffer for an NFT1 Group.
 List<int> Nft1GroupSend(
     List<int> tokenId,
     List<BigInt> slpAmounts
@@ -45,6 +48,7 @@ List<int> Nft1GroupSend(
   );
 }
 
+/// Creates a GENESIS OP_RETURN buffer for an NFT1 child.
 List<int> Nft1ChildGenesis(
     String ticker,
     String name,
@@ -58,11 +62,12 @@ List<int> Nft1ChildGenesis(
     documentUrl,
     documentHash,
     0,
-    new BigInt.from(1),
+    BigInt.from(1),
     null
   );
 }
 
+/// Creates a SEND OP_RETURN buffer for NFT1 child.
 List<int> Nft1ChildSend(
     List<int> tokenId,
     BigInt sendAmount
