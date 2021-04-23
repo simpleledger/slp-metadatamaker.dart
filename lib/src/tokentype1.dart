@@ -8,7 +8,7 @@ List<int> Genesis(
     List<int> documentHash,
     int decimals,
     BigInt quantity,
-    [ int mintBatonVout ]
+    [ int? mintBatonVout ]
   ) {
   return createOpReturnGenesis(
     0x01,
@@ -26,7 +26,7 @@ List<int> Genesis(
 List<int> Mint(
     List<int> tokenId,
     BigInt quantity,
-    [ int mintBatonVout ]
+    [ int? mintBatonVout ]
   ) {
   return createOpReturnMint(
     0x01,

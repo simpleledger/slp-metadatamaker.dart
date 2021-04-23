@@ -1,3 +1,7 @@
+## 1.0.0
+    * Updates for null safety
+    * Add travis.yml
+
 ## 0.1.0
     * Added Dartdoc comments
     * Code linting

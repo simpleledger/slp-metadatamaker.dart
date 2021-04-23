@@ -56,7 +56,7 @@ List<int> createOpReturnGenesis(
   List<int> documentHash,
   int decimals,
   BigInt quantity,
-  [ int mintBatonVout ]
+  [ int? mintBatonVout ]
   ) {
 
   if (! [0x01, 0x41, 0x81].contains(versionType)) {
@@ -71,10 +71,8 @@ List<int> createOpReturnGenesis(
     throw('decimals out of range');
   }
 
-  if (mintBatonVout != null) {
-    if (mintBatonVout < 2 || mintBatonVout > 0xFF) {
-      throw('mintBatonVout out of range (0x02 < > 0xFF)');
-    }
+  if (mintBatonVout != null && (mintBatonVout < 2 || mintBatonVout > 0xFF)) {
+    throw('mintBatonVout out of range (0x02 < > 0xFF)');
   }
 
   if (versionType == 0x41) {
@@ -113,7 +111,7 @@ List<int> createOpReturnMint(
   int versionType,
   List<int> tokenId,
   BigInt quantity,
- [int mintBatonVout = null]
+ [ int? mintBatonVout ]
 ){
   if (! [0x01, 0x41, 0x81].contains(versionType)) {
     throw('unknown versionType');

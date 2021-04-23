@@ -70,25 +70,25 @@ void main() {
       });
     
       test('OK: 0x4e length', () {
-        List<int> dat = new List<int>(0x4e);
+        List<int> dat = new List<int>.filled(0x4e, 0);
         dat.fillRange(0, 0x4e, 0xff);
         expect(pushdata(dat),[0x4c, 0x4e, ...dat]);
       });
     
       test('OK: 0x4c', () {
-        List<int> dat = new List<int>(0x4f);
+        List<int> dat = new List<int>.filled(0x4f, 0);
         dat.fillRange(0, 0x4f, 0xff);
         expect(pushdata(dat),[0x4c, 0x4f, ...dat]);
       });
     
       test('OK: 0x4d', () {
-        List<int> dat = new List<int>(0x100);
+        List<int> dat = new List<int>.filled(0x100, 0);
         dat.fillRange(0, 0x100, 0xff);
         expect(pushdata(dat),[0x4d, 0x00, 0x01, ...dat]);
       });
     
       test('OK: 0x4e', () {
-        List<int> dat = new List<int>(0x10000);
+        List<int> dat = new List<int>.filled(0x10000, 0);
         dat.fillRange(0, 0x10000, 0xff);
         expect(pushdata(dat),[0x4e, 0x00, 0x00, 0x01, 0x00, ...dat]);
       });
@@ -316,7 +316,7 @@ void main() {
     });
 
     test('OK: SEND with 19 token output amounts', () {
-      var dat = List<BigInt>(19);
+      var dat = List<BigInt>.filled(19, BigInt.from(0));
       var result = Send(hex.decode('8'.padRight(64, '8')), dat.map((a) => BigInt.from(0x01)).toList());
       expect(hex.encode(result), '6a04534c500001010453454e44208888888888888888888888888888888888888888888888888888888888888888080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001080000000000000001');
     });
@@ -326,12 +326,12 @@ void main() {
     });
 
     test('(must be invalid: too many parameters): SEND with 20 token output amounts', () {
-      var dat = List<BigInt>(20);
+      var dat = List<BigInt>.filled(20, BigInt.from(0));
       expect(() => Send(hex.decode('8'.padRight(64, '8')), dat.map((a) => BigInt.from(0x01)).toList()), throwsA('too many slp amounts'));
     });
 
     test('OK: all output amounts 0', () {
-      var dat = List<BigInt>(2);
+      var dat = List<BigInt>.filled(2, BigInt.from(0));
       var result = Send(hex.decode('8'.padRight(64, '8')), dat.map((a) => BigInt.from(0x00)).toList());
       expect(hex.encode(result), '6a04534c500001010453454e44208888888888888888888888888888888888888888888888888888888888888888080000000000000000080000000000000000');
      });

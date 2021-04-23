@@ -8,7 +8,7 @@ List<int> Nft1GroupGenesis(
     List<int> documentHash,
     int decimals,
     BigInt quantity,
-    [ int mintBatonVout ]
+    [ int? mintBatonVout ]
   ) {
   return createOpReturnGenesis(
     0x81,
@@ -26,7 +26,7 @@ List<int> Nft1GroupGenesis(
 List<int> Nft1GroupMint(
     List<int> tokenId,
     BigInt quantity,
-    [ int mintBatonVout ]
+    [ int? mintBatonVout ]
   ) {
   return createOpReturnMint(
     0x81,

@@ -1,10 +1,10 @@
 name: slp_mdm
-version: 0.1.0
+version: 1.0.0
 homepage: https://github.com/simpleledger/slp-metadatamaker.dart
 description: Create Simple Ledger Protocol OP_RETURN data segments with ease!
 dependencies:
-    convert: ^2.1.1
+    convert: ^3.0.0
 dev_dependencies:
     test: ^1.14.2
 environment:
-    sdk: '>=2.5.0 <3.0.0'
+    sdk: '>=2.12.0 <3.0.0'
